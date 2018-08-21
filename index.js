@@ -1,44 +1,71 @@
 'use-strict'
 
-//cargar orm y app.js
-//var mongoose = require('mongoose');
-const Sequelize = require('sequelize');
 var app = require('./app');
+var debug = require('debug')('express-sequelize');
+var http = require('http');
+var models = require('./modelos');
 
 //crear la variable de port
-var port = process.env.PORT || 3000;
-process.env.DB_HOST = 'postgres';
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
 
-const sequelize = new Sequelize('postgres://postgres:bdatos@db:5432/dbaccesscontrol');
+var server = http.createServer(app);
 
-sequelize
-    .authenticate()
-    .then(() => {
-        console.log('Connection has been established successfully.');
-        app.listen(port, (err) => {
-            if (!err) {
-                console.log('Servidor Access Control PH Corriendo');
-            } else {
-                console.log('Error! Not runs the Server');
-            }
-        });
+// 'postgres://username:password@ip:puerto/name_datadase' -- usando PhAdmin local
+// const sequelize = new Sequelize('postgres://postgres:bdatos@localhost:52651/ph_man_database');
 
-    })
-    .catch(err => {
-        console.error('Unable to connect to the database:', err);
+// 'postgres://username:password@ip:puerto/name_datadase' -- PhAdmin con docker
+//const sequelize = new Sequelize('postgres://postgres:bdatos@db:5432/ph_man_database');
+
+models.sequelize.sync().then(function () {
+
+    server.listen(port, function () {
+        debug('Servidor Access Control PH Corriendo en el puerto: ' + server.address().port);
     });
-/*
-mongoose.connect('mongodb://localhost:27017/control_access_ph', (err) => {
-    if (err) {
-        throw err;
+    server.on('error', onError);
+    server.on('listening', onListening);
+});
+
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+
+    if (isNaN(port)) return val;
+
+    if (port >= 0) return port;
+
+    return false;
+}
+
+
+
+function onError(error) {
+    if (error.syscall !== 'listen') {
+        throw error;
     }
-    //
-    app.listen(port, (err) => {
-        if (!err) {
-            console.log('Servidor Access Control PH Corriendo');
-        } else {
-            console.log('Error! Not runs the Server');
-        }
-    });
 
-});*/
+    var bind = typeof port === 'string' ?
+        'Pipe ' + port :
+        'Port ' + port;
+
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' se requieren privilegios');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' ya esta en uso');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
+
+
+function onListening() {
+    var addr = server.address();
+    var bind = typeof addr === 'string' ?
+        'pipe ' + addr :
+        'port ' + addr.port;
+    debug('Listening on ' + bind);
+}
