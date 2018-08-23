@@ -6,9 +6,9 @@ var bodyParser = require('body-parser');
 var app = express();
 
 //cargar las rutas
-var deviceRoute = require('./vistas/dispositivoRuta');
-var phRoute = require('./vistas/propiedadRuta');
-var biencomunRoute = require('./vistas/bienComunRuta');
+// var deviceRoute = require('./vistas/dispositivoRuta');
+// var phRoute = require('./vistas/propiedadRuta');
+// var biencomunRoute = require('./vistas/bienComunRuta');
 
 //cargar el body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,9 +23,9 @@ app.use((req, res, next) => {
 });
 
 //configurar las rutas
-app.use('/device', deviceRoute);
-app.use('/ph', phRoute);
-app.use('/ph', biencomunRoute);
+// app.use('/device', deviceRoute);
+// app.use('/ph', phRoute);
+// app.use('/ph', biencomunRoute);
 
 
 

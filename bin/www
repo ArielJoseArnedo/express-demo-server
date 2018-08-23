@@ -1,26 +1,35 @@
-'use-strict'
+#!/usr/bin/env node
 
-var app = require('./app');
-var debug = require('debug')('express-sequelize');
+var app = require('../app');
+var debug = require('debug')('ph_man_server');
 var http = require('http');
-var models = require('./modelos');
+var log4js = require('log4js');
+var models = require('../modelos');
+
+log4js.configure('./config/log4js.json');
+
+var log = log4js.getLogger("Inicio");
+
+try {
+    require('fs').mkdirSync('./log');
+  } catch (e) {
+    if (e.code != 'EEXIST') {
+      log.error("No se encontro el archivo de log: ", e);
+      process.exit(1);
+    }
+  }
 
 //crear la variable de port
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
+log.info("Creando el servidor");
 var server = http.createServer(app);
-
-// 'postgres://username:password@ip:puerto/name_datadase' -- usando PhAdmin local
-// const sequelize = new Sequelize('postgres://postgres:bdatos@localhost:52651/ph_man_database');
-
-// 'postgres://username:password@ip:puerto/name_datadase' -- PhAdmin con docker
-//const sequelize = new Sequelize('postgres://postgres:bdatos@db:5432/ph_man_database');
 
 models.sequelize.sync().then(function () {
 
     server.listen(port, function () {
-        debug('Servidor Access Control PH Corriendo en el puerto: ' + server.address().port);
+        log.info('Servidor Access Control PH Corriendo en el puerto: ' + server.address().port);
     });
     server.on('error', onError);
     server.on('listening', onListening);
@@ -35,8 +44,6 @@ function normalizePort(val) {
 
     return false;
 }
-
-
 
 function onError(error) {
     if (error.syscall !== 'listen') {
@@ -60,7 +67,6 @@ function onError(error) {
             throw error;
     }
 }
-
 
 function onListening() {
     var addr = server.address();
