@@ -17,3 +17,5 @@ Nota: testeando el orm me doy cuenta que tambien puede crear el SQL a partir de 
 ![enter image description here](http://i38.photobucket.com/albums/e131/ArielJose55/Untitled_zpsdhkjfrbx.jpg)
 Y si el nombre de la tabla está en singular, el orm no reconocera la tabla y creara otra en plural:
 ![enter image description here](http://i38.photobucket.com/albums/e131/ArielJose55/Untitled_zpsmvpew6t1.jpg)
+La solucion es agregar una tag llamado tableName con valor del nombre de la tabla en singular, debajo de la deficion de los atributos del modelo:
+![enter image description here](http://i38.photobucket.com/albums/e131/ArielJose55/Untitled_zpsiqtw1ahn.jpg)
