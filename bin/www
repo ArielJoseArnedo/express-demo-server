@@ -23,7 +23,6 @@ try {
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-log.info("Creando el servidor");
 var server = http.createServer(app);
 
 models.sequelize.sync().then(function () {
@@ -56,11 +55,11 @@ function onError(error) {
 
     switch (error.code) {
         case 'EACCES':
-            console.error(bind + ' se requieren privilegios');
+            log.error(bind + ' se requieren privilegios');
             process.exit(1);
             break;
         case 'EADDRINUSE':
-            console.error(bind + ' ya esta en uso');
+            log.error(bind + ' ya esta en uso');
             process.exit(1);
             break;
         default:
@@ -73,5 +72,5 @@ function onListening() {
     var bind = typeof addr === 'string' ?
         'pipe ' + addr :
         'port ' + addr.port;
-    debug('Listening on ' + bind);
+    log.info('Listening on ' + bind);
 }

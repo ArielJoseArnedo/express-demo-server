@@ -1,22 +1,23 @@
 'use-strict'
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, DataTypes) => {
     var Persona = sequelize.define('persona',{
         numeroIdentificacion:{
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             field: 'numero_identificacion'
         },
         tipoDocumento:{
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             field: 'tipo_documento'
         },
         image:{
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             field: 'image'
         }
     },{
+        tableName: 'persona',
         createdAt: false,
         updatedAt: false
     });

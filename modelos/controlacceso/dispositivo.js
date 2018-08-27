@@ -1,8 +1,14 @@
 'use-strict'
-module.exports = (sequelize, Sequelize) => {
-    var Dispositivo = sequelize.define('dispositivos', {
+module.exports = (sequelize, DataTypes) => {
+    var Dispositivo = sequelize.define('Dispositivo', {
         
-    }); 
+    },{
+        tableName: 'dispositivo'
+    });
     
+    Dispositivo.associate = (models) =>{
+        
+    };
+
     return Dispositivo;
 };
