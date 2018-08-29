@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             field: 'apellidos'
         }
     },{
-        tableName: 'Persona_Natural',
+        tableName: 'persona_natural',
         createdAt: false,
         updatedAt: false
     });

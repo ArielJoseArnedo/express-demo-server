@@ -10,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
             field: 'razon_social'
         }
     },{
-        tableName: 'Persona_Juridica',
+        tableName: 'persona_juridica',
         createdAt: false,
         updatedAt: false
     });
 
     PersonaJuridica.associate = function(models){
-        console.log(models);
+        models.PersonaJuridica.belongsTo(models.Persona,{foreignKey:'numero_identificacion_fk'});
     };
 
     return PersonaJuridica;

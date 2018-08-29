@@ -14,7 +14,7 @@ function tokenUsuario(usuario){
         iat: moment().unix(),
         exp: moment().add(30,'days').unix()
     };
-    return jwt.encode(payload,secret);
+    return jwt.encode(payload,semilla);
 }
 
 function tokenDispositivo(dispositivo){
@@ -26,10 +26,10 @@ function tokenDispositivo(dispositivo){
         iat: moment().unix(),
         exp: moment().add(30,'days').unix()
     };
-    return jwt.encode(payload, secret);
+    return jwt.encode(payload, semilla);
 }
 
 module.exports={
-    createTokenUser,
-    createTokenDevice
+    tokenUsuario,
+    tokenDispositivo
 };

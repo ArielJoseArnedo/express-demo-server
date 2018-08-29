@@ -9,11 +9,13 @@ const controllerUsuario = require('../controladores/core/controllerUsuario');
 const auth = require('../servicios/authServicio');
 
 //Routes GET
-api.get('/login', auth.authUsuario, controllerUsuario.inicioSesion);
+
 
 
 //Router POST
-
+api.post('/login', controllerUsuario.inicioSesion);
+// api.post('/adduser', auth.authUsuario, controllerUsuario.agregarUsuario);
+api.post('/adduser', controllerUsuario.agregarUsuario);
 
 // Router DELETE
 

@@ -1,6 +1,6 @@
 'use-strict'
 module.exports = (sequelize, DataTypes) => {
-    var Persona = sequelize.define('persona',{
+    var Persona = sequelize.define('Persona',{
         numeroIdentificacion:{
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Persona.associate = function(models){
         console.log(models);
+        
     };
 
     return Persona;
