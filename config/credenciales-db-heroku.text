@@ -1,0 +1,7 @@
+Host :ec2-54-225-110-152.compute-1.amazonaws.com
+Database : d396cgp3qu030j
+User : qmrznzizjbdqsj
+Port : 5432
+Password : a133aee47114e89f8c83405ef411c44d95803f6b65369a13c06968b342270954
+URI : postgres://qmrznzizjbdqsj:a133aee47114e89f8c83405ef411c44d95803f6b65369a13c06968b342270954@ec2-54-225-110-152.compute-1.amazonaws.com:5432/d396cgp3qu030j
+Heroku CLI : heroku pg:psql postgresql-transparent-18255 --app phman-udec
