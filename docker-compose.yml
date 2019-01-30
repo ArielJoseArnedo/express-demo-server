@@ -1,23 +1,15 @@
 version: "3"
 services:  
   node:
-    image: "node:8"
+    image: "node"
+    container_name: "node_env"
     working_dir: /home/node/app
     volumes:
       - ./:/home/node/app
     ports: 
       - 3000:3000
+    expose:
+      - "3000"
     command: "npm start"
-    depends_on:
-      - db
-    links:
-      - db
-    environment:
-      - DATABASE_URL=postgres://postgres:bdatos@db:5432/ph_man_database
-  db:
-    image: postgres
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=bdatos
-      - POSTGRES_DB=ph_man_database
+    
+

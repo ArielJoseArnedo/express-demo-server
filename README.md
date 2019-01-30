@@ -20,4 +20,4 @@ Y si el nombre de la tabla está en singular, el orm no reconocera la tabla y cr
 La solucion es agregar una tag llamado tableName con valor del nombre de la tabla en singular, debajo de la deficion de los atributos del modelo:
 ![enter image description here](http://i38.photobucket.com/albums/e131/ArielJose55/Untitled_zpsiqtw1ahn.jpg)
 
-**RECOMENDACION:** Colocar el nombre de la tablas en singular y sin la notacion CamelCase, sino separar las palabras con guiones de piso, los mismo para los nombres de las columnas y para las llaves foreneas colocarle el mismo nombre de la lleve primaria de la tabla que hace referencia y al final colocar '_fk'. ejemplo: *id_persona_natural_fk*
+**RECOMENDACION:** git-flow: Rama en la que estoy trabajando: feature/s-login
