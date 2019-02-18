@@ -1,4 +1,3 @@
-'use-strict'
 module.exports = {
     development: {
         host: "pellefant.db.elephantsql.com",
