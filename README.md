@@ -10,8 +10,8 @@
 ```sh
 docker-compose up -d
 ```
-*localhost:3000*  Server Node
-*localhost: 5630*  Postgres
+*localhost:3000*  Server Node,
+*localhost: 5630*  Postgres,
 *localhost: 5050*  PgAdmin4
 
 + Configurar PgAdmin4
@@ -19,7 +19,7 @@ docker-compose up -d
 ![Añadir un nuevo servidor](https://res.cloudinary.com/wevycep/image/upload/v1550502321/ph-man/pgadmin-config-container/postgres.png)
 + Configurar los parametros del server
     ![parametros servidor name](https://res.cloudinary.com/wevycep/image/upload/v1550503989/ph-man/pgadmin-config-container/postgres2.png)
-    ![parametros servidor](https://res.cloudinary.com/wevycep/image/upload/v1550503989/ph-man/pgadmin-config-container/postgres3.pnggit c)
+    ![parametros servidor](https://res.cloudinary.com/wevycep/image/upload/v1550503989/ph-man/pgadmin-config-container/postgres3.png)
 
 ## Descripcion
 
