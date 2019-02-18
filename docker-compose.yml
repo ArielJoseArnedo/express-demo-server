@@ -4,12 +4,53 @@ services:
     image: "node"
     container_name: "node_env"
     working_dir: /home/node/app
+    links:
+      - postgres
     volumes:
       - ./:/home/node/app
-    ports: 
+    ports:
       - 3000:3000
     expose:
       - "3000"
-    command: "npm start"
+    command: bash -c "npm i && npm start"
+
+  postgres:
+    image: "postgres"
+    restart: always
+    container_name: "ph-man-database"
+    environment:
+      POSTGRES_DB: ph-man-database
+      POSTGRES_USER: ceiba
+      POSTGRES_PASSWORD: root
+    ports:
+      - 5630:5630
+    expose:
+      - "5630"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - pgnetwork
+  pgadmin4:
+    image: "dpage/pgadmin4"
+    restart: always
+    container_name: "pgadmin4"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "ph-man@udec.com.co"
+      PGADMIN_DEFAULT_PASSWORD: "man_ph"
+      PGADMIN_LISTEN_PORT: "5050"
+    volumes:
+      - pgadmin4data:/var/lib/pgadmin
+    ports:
+      - 5050:5050
+    expose:
+      - "5050"
+    networks:
+      - pgnetwork
+volumes:
+  pgdata:
+  pgadmin4data:
+networks: 
+  pgnetwork:
+    driver: bridge
     
 
