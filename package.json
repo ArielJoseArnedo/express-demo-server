@@ -2,9 +2,9 @@
     "name": "phman",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "./src/bin/www",
     "scripts": {
-        "start": "nodemon --exec babel-node ./bin/www",
+        "start": "nodemon -L ./src/bin/www",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -23,9 +23,6 @@
     },
     "homepage": "https://github.com/ArielJose55/ControlAccessPH#README",
     "devDependencies": {
-        "@babel/core": "^7.2.2",
-        "@babel/node": "^7.2.2",
-        "@babel/preset-env": "^7.3.1",
         "nodemon": "^1.18.10"
     },
     "dependencies": {
@@ -35,6 +32,7 @@
         "debug": "^4.1.1",
         "dotenv": "^6.2.0",
         "express": "^4.16.4",
+        "jshint": "^2.10.1",
         "jwt-simple": "^0.5.5",
         "log4js": "^4.0.2",
         "moment": "^2.24.0",

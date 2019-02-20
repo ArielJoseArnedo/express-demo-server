@@ -9,19 +9,15 @@ var config = require(__dirname + '/../config/config.js')[env];
 var db = {};
 const FOLDERS_MODELS = ['core', 'controlacceso'];
 
-
-if (config.use_env_variable) {
-    var sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-    var sequelize = new Sequelize(config.database, config.username, config.password, {
-        host: config.host,
-        port: config.port,
-        dialect: config.dialect,
-        define: {
-            schema: config.schema
-        }
-    });
-}
+const sequelize = new Sequelize(config.database, config.username, config.password, {
+    host: config.host,
+    port: config.port,
+    dialect: config.dialect,
+    define: {
+        schema: config.schema
+    },
+    logging: config.logging
+});
 
 FOLDERS_MODELS.forEach(function(value) {
 
@@ -46,5 +42,6 @@ FOLDERS_MODELS.forEach(function(value) {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
+console.log(config);
+console.log(sequelize);
 module.exports = db;

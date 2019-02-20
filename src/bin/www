@@ -1,33 +1,37 @@
 #!/usr/bin/env node
 
-var app = require('../app');
-var debug = require('debug')('ph_man_server');
-var http = require('http');
-var log4js = require('log4js');
-var models = require('../modelos');
+const fs = require('fs')
 
-log4js.configure('./config/log4js.json');
+const http = require('http');
 
-var log = log4js.getLogger("Inicio");
+const log4js = require('log4js');
+const modelos = require('../modelos');
+const app = require('../../app');
+const logConfig = require('../config/log4js.json');
+
+
+log4js.configure(logConfig);
+
+const log = log4js.getLogger("bootstrap");
 
 try {
-    require('fs').mkdirSync('./log');
-  } catch (e) {
+    fs.mkdirSync('../log');
+} catch (e) {
     if (e.code != 'EEXIST') {
-      log.error("No se encontro el archivo de log: ", e);
-      process.exit(1);
+        log.error("No se encontro el archivo de log: ", e);
+        process.exit(1);
     }
-  }
+}
 
 //crear la variable de port
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 var server = http.createServer(app);
 
-models.sequelize.sync().then(function () {
+modelos.sequelize.sync().then(function() {
 
-    server.listen(port, function () {
+    server.listen(port, function() {
         log.info('Servidor Access Control PH Corriendo en el puerto: ' + server.address().port);
     });
     server.on('error', onError);

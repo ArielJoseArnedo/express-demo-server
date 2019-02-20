@@ -1,12 +1,8 @@
-'use-strict'
+const express = require('express');
+const bodyParser = require('body-parser');
+const usuarioRuta = require('./src/rutas/usuarioRuta');
 
-var express = require('express');
-var bodyParser = require('body-parser');
-
-var app = express();
-
-//cargar las rutas
-const usuarioRuta = require('./rutas/usuarioRuta');
+const app = express();
 
 // var deviceRoute = require('./vistas/dispositivoRuta');
 // var phRoute = require('./vistas/propiedadRuta');
@@ -25,10 +21,8 @@ app.use((req, res, next) => {
 });
 
 //configurar las rutas
- app.use('/ph', usuarioRuta);
+app.use('/ph', usuarioRuta);
 // app.use('/ph', phRoute);
 // app.use('/ph', biencomunRoute);
-
-
 
 module.exports = app;

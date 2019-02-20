@@ -4,7 +4,7 @@ services:
     image: "node"
     container_name: "node_env"
     working_dir: /home/node/app
-    links:
+    depends_on:
       - postgres
     volumes:
       - ./:/home/node/app
@@ -12,20 +12,24 @@ services:
       - 3000:3000
     expose:
       - "3000"
-    command: bash -c "npm i && npm start"
+    command: >
+        sh -c "npm i && npm start"
+    environment:
+      - DATABASE_URL=postgres://phman_user:root@postgres:5360/ph-man-database
 
   postgres:
     image: "postgres"
     restart: always
     container_name: "ph-man-database"
     environment:
-      POSTGRES_DB: ph-man-database
-      POSTGRES_USER: ceiba
-      POSTGRES_PASSWORD: root
+      POSTGRES_DB: "ph-man-database"
+      POSTGRES_USER: "phman_user"
+      POSTGRES_PASSWORD: "root"
+      PGPORT: "5360"
     ports:
-      - 5630:5630
+      - 5360:5360
     expose:
-      - "5630"
+      - "5360"
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:

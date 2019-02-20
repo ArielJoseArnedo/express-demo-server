@@ -1,13 +1,14 @@
+require('dotenv').config()
 module.exports = {
     development: {
-        host: "pellefant.db.elephantsql.com",
-        username: "ynqxytyr",
-        password: "UG_JD1Uc3evaMF0GIJTOuMct5-ciqgwx",
-        database: "ynqxytyr",
-        port: "5432",
+        host: process.env.DB_HOSTNAME,
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+        port: process.env.BD_PORT,
         dialect: "postgres",
-        schema: "public"
-
+        schema: "public",
+        logging: process.env.DB_LOGGING
     },
     heroku: {
         username: process.env.DB_USERNAME,
@@ -28,4 +29,4 @@ module.exports = {
         dialect: 'postgres',
         use_env_variable: 'DATABASE_URL'
     }
-};
+}
