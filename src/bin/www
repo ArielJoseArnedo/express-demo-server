@@ -27,7 +27,7 @@ try {
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 
 modelos.sequelize.sync().then(function() {
 
@@ -39,7 +39,7 @@ modelos.sequelize.sync().then(function() {
 });
 
 function normalizePort(val) {
-    var port = parseInt(val, 10);
+    const port = parseInt(val, 10);
 
     if (isNaN(port)) return val;
 
@@ -53,7 +53,7 @@ function onError(error) {
         throw error;
     }
 
-    var bind = typeof port === 'string' ?
+    const bind = typeof port === 'string' ?
         'Pipe ' + port :
         'Port ' + port;
 

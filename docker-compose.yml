@@ -15,7 +15,9 @@ services:
     command: >
         sh -c "npm i && npm start"
     environment:
-      - DATABASE_URL=postgres://phman_user:root@postgres:5360/ph-man-database
+      - DATABASE_URL=postgres://phman_user:root@postgres:5432/ph-man-database
+    networks: 
+      - dbnetwork
 
   postgres:
     image: "postgres"
@@ -25,15 +27,16 @@ services:
       POSTGRES_DB: "ph-man-database"
       POSTGRES_USER: "phman_user"
       POSTGRES_PASSWORD: "root"
-      PGPORT: "5360"
     ports:
-      - 5360:5360
+      - 5432:5432
     expose:
-      - "5360"
+      - "5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
+      - dbnetwork
       - pgnetwork
+
   pgadmin4:
     image: "dpage/pgadmin4"
     restart: always
@@ -55,6 +58,8 @@ volumes:
   pgadmin4data:
 networks: 
   pgnetwork:
+    driver: bridge
+  dbnetwork:
     driver: bridge
     
 
