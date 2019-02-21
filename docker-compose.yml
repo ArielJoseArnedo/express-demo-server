@@ -1,7 +1,7 @@
 version: "3"
 services:  
   node:
-    image: "node"
+    image: "node:10.15.1"
     container_name: "node_env"
     working_dir: /home/node/app
     depends_on:

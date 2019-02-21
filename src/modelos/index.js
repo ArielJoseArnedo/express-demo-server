@@ -9,29 +9,13 @@ const config = require(__dirname + '/../config/config.js')[process.env.NODE_ENV 
 var db = {};
 const FOLDERS_MODELS = ['core', 'controlacceso'];
 
-// const sequelize = new Sequelize(config.database, config.username, config.password, {
-//     host: config.host,
-//     port: config.port,
-//     dialect: config.dialect,
-//     define: {
-//         schema: config.schema
-//     },
-//     logging: config.logging
-// });
-const sequelize = new Sequelize('ph-man-database', 'phman_user', 'root', {
-    // the sql dialect of the database
-    // currently supported: 'mysql', 'sqlite', 'postgres', 'mssql'
-    dialect: 'postgres',
-
-    // custom host; default: localhost
-    host: 'postgres',
-
-    // custom port; default: dialect default
-    port: 5432,
-
-    // disable logging; default: console.log
+const sequelize = new Sequelize(config.database, config.username, config.password, {
+    host: config.host,
+    port: config.port,
+    dialect: config.dialect,
     logging: false
 });
+
 FOLDERS_MODELS.forEach(function(value) {
 
     let folder = __dirname.concat("/", value);
@@ -55,6 +39,4 @@ FOLDERS_MODELS.forEach(function(value) {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-console.log(config);
-console.log(sequelize);
 module.exports = db;

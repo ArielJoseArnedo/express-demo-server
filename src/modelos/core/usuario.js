@@ -1,4 +1,4 @@
-'use-strict'
+'use-strict';
 module.exports = (sequelize, DataTypes) => {
     var Usuario = sequelize.define('Usuario', {
         idUsuario: {
@@ -43,6 +43,10 @@ module.exports = (sequelize, DataTypes) => {
             values: ['GERENCIA', 'AUXILIAR_DE_GERENCIA'],
             defaultValue: 'GERENCIA',
             field: 'tipo_de_usuario'
+        },
+        personaId: {
+            type: DataTypes.INTEGER,
+            field: 'persona_id'
         }
     }, {
         tableName: 'usuario',
@@ -51,9 +55,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Usuario.associate = (models) => {
-        models.Usuario.belongsTo(models.Persona, {
-            foreignKey: 'numero_identificacion_fk', targetKey: 'numeroIdentificacion'
-        });
+        models.Usuario.belongsTo(models.Persona, { foreignKey: 'persona_id' });
     };
 
     return Usuario;
