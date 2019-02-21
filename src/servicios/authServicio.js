@@ -1,4 +1,4 @@
-'use-strict'
+'use-strict';
 const jwt = require('jwt-simple');
 const moment = require('moment');
 const semilla = '**proyecto-HP-MAN-SERVER**-con-biometria-y_toda_esa_joda**';
@@ -10,10 +10,10 @@ function authUsuario(req, res, next) {
             message: 'No esta autorizado para realizar esta operacion'
         });
 
-        let token = req.headers.authorization.replace(/['"]+/g, '');
+        const token = req.headers.authorization.replace(/['"]+/g, '');
 
         try {
-            var payload = jwt.decode(token, semilla);
+            const payload = jwt.decode(token, semilla);
 
             if (payload.exp <= moment.unix()) {
                 return res.status(404).send({
@@ -41,10 +41,10 @@ function authDispositivo(req, res, next) {
         });
     }
 
-    let token = req.headers.authorization.replace(/['"]/ + g, '');
+    const token = req.headers.authorization.replace(/['"]/ + g, '');
 
     try {
-        var payloadDevice = jwt.decode(token, semilla);
+        const payloadDevice = jwt.decode(token, semilla);
 
         if (payloadDevice.exp <= moment.unix()) {
             return res.status(404).send({

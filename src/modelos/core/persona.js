@@ -1,30 +1,30 @@
 'use-strict'
 module.exports = (sequelize, DataTypes) => {
-    var Persona = sequelize.define('Persona',{
-        numeroIdentificacion:{
+    var Persona = sequelize.define('Persona', {
+        numeroIdentificacion: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             field: 'numero_identificacion'
         },
-        tipoDocumento:{
+        tipoDocumento: {
             type: DataTypes.STRING,
             allowNull: false,
             field: 'tipo_documento'
         },
-        image:{
+        image: {
             type: DataTypes.STRING,
             field: 'image'
         }
-    },{
+    }, {
         tableName: 'persona',
         createdAt: false,
         updatedAt: false
     });
 
-    Persona.associate = function(models){
-        console.log(models);
-        
+    Persona.associate = (models) => {
+
+
     };
 
     return Persona;
