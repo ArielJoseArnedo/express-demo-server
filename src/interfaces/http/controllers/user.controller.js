@@ -1,37 +1,34 @@
-'use-strict';
+const { userService } = require('../../../domain/services');
+
 const httpStatus = require('http-status');
-const UsuarioService = require('../../servicios/UsuarioService');
 
-
-
-function inicioSesion(req, res) {
+function login(req, res) {
     const username = req.body.username;
     const password = req.body.password;
     const hash = req.body.hash;
-
-    UsuarioService.loginUser(username, password, hash).then(usuario => {
-        res.status(httpStatus.OK).send({ usuario: usuario });
+    userService.authUser(username, password, hash).then(user => {
+        res.status(httpStatus.OK).send({ user: user });
     }).catch(err => {
         res.status(httpStatus.NOT_ACCEPTABLE).send({ error: err.message });
     });
 }
 
-function agregarUsuario(req, res) {
+function registerUser(req, res) {
 
-    let persona = {
+    let person = {
         numeroIdentificacion: req.body.identificacion,
         tipoDocumento: req.body.documento
     };
 
-    let usuario = {
+    let user = {
         username: req.body.username,
         password: req.body.password,
         estado: req.body.estado,
-        tipoDeUsuario: req.body.usuario,
+        tipoDeUsuario: req.body.user,
         personaId: req.body.identificacion
     };
-    UsuarioService.addUser(persona, usuario).then(usuario => {
-        res.status(httpStatus.OK).send({ usuario: usuario });
+    userService.addUser(person, user).then(user => {
+        res.status(httpStatus.OK).send({ user: user });
     }).catch(err => {
         res.status(httpStatus.NOT_FOUND).send({ error: err.message });
     });
@@ -39,6 +36,6 @@ function agregarUsuario(req, res) {
 
 
 module.exports = {
-    inicioSesion,
-    agregarUsuario
+    login,
+    registerUser
 };

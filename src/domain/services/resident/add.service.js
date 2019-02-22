@@ -3,10 +3,10 @@ const {
     PersonaNatural,
     Residente,
     sequelize
-} = require('../../modelos');
+} = require('../../models');
 
-async addResident(person, naturalPerson, resident) {
-    sequelize.transaction((t) => {
+const addResident = (person, naturalPerson, resident) => {
+    sequelize.transaction(async(t) => {
         try {
             let personCreate = await Persona.create(person);
             let naturalPersonCreate = await PersonaNatural.create(naturalPerson);

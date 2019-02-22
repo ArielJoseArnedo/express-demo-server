@@ -1,4 +1,4 @@
 module.exports = {
-    residenteService: require('./residente'),
-    usuarioService: require('./usuario')
+    residentService: require('./resident'),
+    userService: require('./user')
 }

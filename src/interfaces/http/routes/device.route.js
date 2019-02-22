@@ -7,12 +7,14 @@ var express = require('express');
 var api = express.Router();
 
 //cargar el controlador
-var controladorPropiedad = require('../controladores/controladorPropiedad');
+
 
 //cargar el middleware de autenticacion
-var autenticacion = require('../controladores/autenticacion');
+
 
 //cargar si se requiere el connect-multiparty
+
+
 
 //cargar las rutas get
 

@@ -24,6 +24,4 @@ function registrarMascota(req, res) {
         especie: req.body.especie,
         residenteFk: req.body.residente
     };
-
-
 }

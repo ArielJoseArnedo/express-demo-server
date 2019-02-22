@@ -1,12 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const usuarioRuta = require('./src/rutas/usuarioRuta');
+const { userRoute } = require('./interfaces/http/routes');
+
 
 const app = express();
-
-// var deviceRoute = require('./vistas/dispositivoRuta');
-// var phRoute = require('./vistas/propiedadRuta');
-// var biencomunRoute = require('./vistas/bienComunRuta');
 
 //cargar el body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,7 +18,7 @@ app.use((req, res, next) => {
 });
 
 //configurar las rutas
-app.use('/ph', usuarioRuta);
+app.use('/ph', userRoute);
 // app.use('/ph', phRoute);
 // app.use('/ph', biencomunRoute);
 
