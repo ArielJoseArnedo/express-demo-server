@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Usuario.associate = (models) => {
-        models.Usuario.belongsTo(models.Persona, { foreignKey: 'persona_id' });
+        models.Usuario.belongsTo(models.Persona, { foreignKey: 'personaId' });
     };
 
     return Usuario;

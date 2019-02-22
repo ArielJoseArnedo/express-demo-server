@@ -1,14 +1,8 @@
 'use-strict';
+const httpStatus = require('http-status');
 const UsuarioService = require('../../servicios/UsuarioService');
 
-const jwtServicio = require('../../servicios/jwtServicio');
-const httpStatus = require('http-status');
-const log4js = require('log4js');
 
-const Usuario = require('../../modelos/index').Usuario;
-const Persona = require('../../modelos/index').Persona;
-
-const log = log4js.getLogger('ControllerUsuario');
 
 function inicioSesion(req, res) {
     const username = req.body.username;
@@ -47,4 +41,4 @@ function agregarUsuario(req, res) {
 module.exports = {
     inicioSesion,
     agregarUsuario
-}
+};

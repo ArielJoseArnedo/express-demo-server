@@ -1,7 +1,7 @@
 'use-strict';
 const bcryptNodejs = require('bcrypt-nodejs');
 const { Usuario, sequelize, Persona } = require('../modelos');
-const jwtServicio = require('./jwtServicio');
+const jwtServicio = require('../middleware/jwtServicio');
 
 
 async function loginUser(username, password, hash) {
