@@ -1,7 +1,9 @@
 const bcryptNodejs = require('bcrypt-nodejs');
 const { Usuario } = require('../../models');
 const { jwt } = require('../../../interfaces/http/middleware');
-
+const log4js = require('log4js');
+log4js.configure(require('../../../config/log4js.json'));
+const log = log4js.getLogger("auth-user");
 
 const loginUser = async function(username, password, hash) {
 
@@ -12,10 +14,15 @@ const loginUser = async function(username, password, hash) {
         if (match) {
             return await hash ? jwt.tokenUser(user) : user;
         }
+
+        log.debug(`loginUser - Username y/o contraseña son incorrectas ${username}`);
+
         throw new Error('Username y/o contraseña son incorrectas');
     }
 
-    throw new Error('User no esta registrado');
+    log.debug(`Usuario no esta registrado ${username}`);
+
+    throw new Error('Usuario no esta registrado');
 }
 
 module.exports = loginUser;

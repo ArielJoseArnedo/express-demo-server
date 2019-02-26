@@ -1,3 +1,5 @@
+const log4Js = require('log4js');
+
 const {
     Persona,
     PersonaNatural,
@@ -5,15 +7,18 @@ const {
     sequelize
 } = require('../../models');
 
-const addResident = (person, naturalPerson, resident) => {
-    sequelize.transaction(async(t) => {
+const log = log4Js.getLogger("AddResidente");
+
+function addResident(person, naturalPerson, resident) {
+     return sequelize.transaction(async(t) => {
         try {
-            let personCreate = await Persona.create(person);
-            let naturalPersonCreate = await PersonaNatural.create(naturalPerson);
-            let residentCreate = await Residente.create(resident);
+            const personCreate = await Persona.create(person);
+            const naturalPersonCreate = await PersonaNatural.create(naturalPerson);
+            const residentCreate = await Residente.create(resident);
             return residentCreate;
         } catch (error) {
             t.rollback();
+            log.error(`Error al realizar la transacción de agregar residente ${error.message}`);
             throw new Error('Uoops! No fue posible registrarte, intentelo de nuevo');
         }
     });
